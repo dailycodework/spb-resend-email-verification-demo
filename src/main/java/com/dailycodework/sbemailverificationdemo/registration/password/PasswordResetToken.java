@@ -1,4 +1,4 @@
-package com.dailycodework.sbemailverificationdemo.registration.token;
+package com.dailycodework.sbemailverificationdemo.registration.password;
 
 import com.dailycodework.sbemailverificationdemo.user.User;
 import jakarta.persistence.*;
@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * @author Sampson Alfred
@@ -16,26 +17,26 @@ import java.util.Date;
 @Setter
 @Entity
 @NoArgsConstructor
-public class VerificationToken {
+public class PasswordResetToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long token_id;
     private String token;
     private Date expirationTime;
-    private static final int EXPIRATION_TIME = 5;
+    private static final int EXPIRATION_TIME = 10;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public VerificationToken(String token, User user) {
+    public PasswordResetToken(String token, User user) {
         super();
         this.token = token;
         this.user = user;
         this.expirationTime = this.getTokenExpirationTime();
     }
 
-    public VerificationToken(String token) {
+    public PasswordResetToken(String token) {
         super();
         this.token = token;
         this.expirationTime = this.getTokenExpirationTime();

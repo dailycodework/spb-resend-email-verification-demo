@@ -14,7 +14,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: dailycodework@gmail.com
-    password:
+    password: nzcgxvmbqvyjkdzu
     properties:
       mail:
         smtp:
