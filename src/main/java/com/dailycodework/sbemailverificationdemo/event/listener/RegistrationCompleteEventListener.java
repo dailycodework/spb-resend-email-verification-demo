@@ -61,4 +61,21 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         messageHelper.setText(mailContent, true);
         mailSender.send(message);
     }
+
+    public void sendPasswordResetVerificationEmail(String url) throws MessagingException, UnsupportedEncodingException {
+        String subject = "Password Reset Request Verification";
+        String senderName = "User Registration Portal Service";
+        String mailContent = "<p> Hi, "+ theUser.getFirstName()+ ", </p>"+
+                "<p><b>You recently requested to reset your password,</b>"+"" +
+                "Please, follow the link below to complete the action.</p>"+
+                "<a href=\"" +url+ "\">Reset password</a>"+
+                "<p> Users Registration Portal Service";
+        MimeMessage message = mailSender.createMimeMessage();
+        var messageHelper = new MimeMessageHelper(message);
+        messageHelper.setFrom("dailycodework@gmail.com", senderName);
+        messageHelper.setTo(theUser.getEmail());
+        messageHelper.setSubject(subject);
+        messageHelper.setText(mailContent, true);
+        mailSender.send(message);
+    }
 }
